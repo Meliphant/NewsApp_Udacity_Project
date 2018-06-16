@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         setContentView(R.layout.activity_main);
         newsListView = findViewById(R.id.list_view);
         emptyStateTextView = findViewById(R.id.empty_view);
-        ;
 
         mSwipeRefreshLayout = findViewById(R.id.refresh);
         mSwipeRefreshLayout.setOnRefreshListener(this);
