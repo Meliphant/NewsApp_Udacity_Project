@@ -2,6 +2,7 @@ package com.example.android.newsapp_udacity_project;
 
 import android.content.AsyncTaskLoader;
 import android.content.Context;
+
 import java.util.List;
 
 public class AsyncLoader extends AsyncTaskLoader<List<News>> {
@@ -9,6 +10,10 @@ public class AsyncLoader extends AsyncTaskLoader<List<News>> {
 
     public AsyncLoader(Context context, String url) {
         super(context);
+        this.url = url;
+    }
+
+    public void setUrl(String url) {
         this.url = url;
     }
 

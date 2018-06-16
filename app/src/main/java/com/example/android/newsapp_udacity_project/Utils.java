@@ -17,8 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Utils {
-    private static final String LOG_TAG = Utils.class.getSimpleName();
 
+    private static final String LOG_TAG = Utils.class.getSimpleName();
     private static final String RESPONSE = "response";
     private static final String RESULTS = "results";
     private static final String TITLE = "webTitle";
