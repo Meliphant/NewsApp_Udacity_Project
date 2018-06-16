@@ -1,4 +1,4 @@
-package com.example.android.newsapp_udacity_project;
+package com.example.android.newsapp_udacity_project.view;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -6,6 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.example.android.newsapp_udacity_project.model.News;
+import com.example.android.newsapp_udacity_project.R;
 
 import java.util.ArrayList;
 

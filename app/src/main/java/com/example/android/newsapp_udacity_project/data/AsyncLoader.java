@@ -1,7 +1,9 @@
-package com.example.android.newsapp_udacity_project;
+package com.example.android.newsapp_udacity_project.data;
 
 import android.content.AsyncTaskLoader;
 import android.content.Context;
+
+import com.example.android.newsapp_udacity_project.model.News;
 
 import java.util.List;
 

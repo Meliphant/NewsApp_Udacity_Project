@@ -1,4 +1,4 @@
-package com.example.android.newsapp_udacity_project;
+package com.example.android.newsapp_udacity_project.view;
 
 import android.app.LoaderManager;
 import android.content.Context;
@@ -13,6 +13,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.example.android.newsapp_udacity_project.data.AsyncLoader;
+import com.example.android.newsapp_udacity_project.model.News;
+import com.example.android.newsapp_udacity_project.R;
 
 import java.util.ArrayList;
 import java.util.List;

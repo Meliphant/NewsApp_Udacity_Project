@@ -1,7 +1,10 @@
-package com.example.android.newsapp_udacity_project;
+package com.example.android.newsapp_udacity_project.data;
 
 import android.text.TextUtils;
 import android.util.Log;
+
+import com.example.android.newsapp_udacity_project.model.News;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

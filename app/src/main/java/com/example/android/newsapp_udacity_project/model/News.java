@@ -1,4 +1,4 @@
-package com.example.android.newsapp_udacity_project;
+package com.example.android.newsapp_udacity_project.model;
 
 public class News {
     private String title;
