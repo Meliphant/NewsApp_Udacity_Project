@@ -4,12 +4,15 @@ import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,7 +20,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.android.newsapp_udacity_project.data.AsyncLoader;
-import com.example.android.newsapp_udacity_project.data.SettingsActivity;
 import com.example.android.newsapp_udacity_project.model.News;
 import com.example.android.newsapp_udacity_project.R;
 
@@ -26,8 +28,19 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<News>>, SwipeRefreshLayout.OnRefreshListener {
 
-    private static final String REQUEST_URL = "http://content.guardianapis.com/search?order-by=newest&page-size=20&q=&api-key=test&show-fields=thumbnail,trailText,byline";
+    private static final String REQUEST_URL = "http://content.guardianapis.com/search";
     private static final int NEWS_LOADER_ID = 1;
+    private static final String PAGE_SIZE = "page-size";
+    private static final String API_KEY = "api-key";
+    private static final String KEY = "test";
+    private static final String SHOW_FIELDS = "show-fields";
+    private static final String THUMBNAIL_TRAIL_TEXT_BYLINE = "thumbnail,trailText,byline";
+    private static final String NONE = "none";
+    private static final String SECTION = "section";
+    private static final String ORDER_BY = "order-by";
+    private static final String NEWEST = "newest";
+    private static final String RELEVANCE = "relevance";
+    private static final String QUERY = "q";
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
 
     private ArrayAdapter adapter;
@@ -74,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public Loader<List<News>> onCreateLoader(int id, Bundle args) {
-        return new AsyncLoader(this, REQUEST_URL);
+        return new AsyncLoader(this, searchResult(null));
     }
 
     @Override
@@ -105,7 +118,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         if (networkInfo != null && networkInfo.isConnected()) {
             adapter.clear();
-            loader.setUrl(REQUEST_URL);
+            loader.setUrl(searchResult(null));
             loader.forceLoad();
             emptyStateTextView.setVisibility(View.GONE);
         } else {
@@ -114,6 +127,35 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             emptyStateTextView.setText(R.string.no_internet_connection);
             adapter.clear();
         }
+    }
+
+    private String searchResult(String query) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        Uri baseUri = Uri.parse(REQUEST_URL);
+        Uri.Builder uriBuilder = baseUri.buildUpon();
+
+        String pageSize = sharedPreferences.getString(getString(R.string.settings_page_size_key),
+                getString(R.string.settings_page_size_default));
+        if (TextUtils.isEmpty(pageSize)) {
+            pageSize = "0";
+        }
+        uriBuilder.appendQueryParameter(PAGE_SIZE, pageSize);
+        uriBuilder.appendQueryParameter(API_KEY, KEY);
+        uriBuilder.appendQueryParameter(SHOW_FIELDS, THUMBNAIL_TRAIL_TEXT_BYLINE);
+        String section = sharedPreferences.getString(getString(R.string.settings_category_to_show_key), getString(R.string.settings_category_to_show_default));
+        if (!section.equals(NONE)) {
+            uriBuilder.appendQueryParameter(SECTION, section);
+        }
+
+        if (query == null) {
+            uriBuilder.appendQueryParameter(ORDER_BY, NEWEST);
+            return uriBuilder.toString();
+        }
+        uriBuilder.appendQueryParameter(ORDER_BY, RELEVANCE);
+        uriBuilder.appendQueryParameter(QUERY, query);
+
+        return uriBuilder.toString();
     }
 
     @Override

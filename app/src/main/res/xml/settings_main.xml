@@ -7,12 +7,12 @@
         android:inputType="numberDecimal"
         android:key="@string/settings_page_size_key"
         android:selectAllOnFocus="true"
-        android:title="@string/settings_page_size_news" />
+        android:title="@string/settings_page_size" />
 
     <ListPreference
-        android:defaultValue="@string/settings_only_show_default"
-        android:entries="@array/settings_order_by_labels"
-        android:entryValues="@array/settings_order_by_values"
-        android:key="@string/settings_only_show_key"
-        android:title="@string/settings_only_show" />
+        android:defaultValue="@string/settings_category_to_show_default"
+        android:entries="@array/settings_category_to_show_labels"
+        android:entryValues="@array/settings_category_to_show_values"
+        android:key="@string/settings_category_to_show_key"
+        android:title="@string/settings_category_to_show" />
 </PreferenceScreen>

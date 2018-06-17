@@ -30,6 +30,8 @@ public class Utils {
     private static final String URL = "webUrl";
     private static final String FIELDS = "fields";
     private static final String AUTHOR = "byline";
+    private static final String TITLE_IS_MISSING = "Title is missing";
+    private static final String CATEGORY_IS_MISSING = "Section is missing";
 
     private Utils() {
     }
@@ -129,6 +131,9 @@ public class Utils {
                 String newsURL = currentNewsObj.getString(URL);
                 JSONObject fields = currentNewsObj.getJSONObject(FIELDS);
                 String newsAuthor = fields.getString(AUTHOR);
+
+                if (TextUtils.isEmpty(newsTitle)) newsTitle = TITLE_IS_MISSING;
+                if (TextUtils.isEmpty(newsCategory)) newsCategory = CATEGORY_IS_MISSING;
 
                 String newsDateFormated;
 
