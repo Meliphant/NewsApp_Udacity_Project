@@ -143,7 +143,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         uriBuilder.appendQueryParameter(PAGE_SIZE, pageSize);
         uriBuilder.appendQueryParameter(API_KEY, KEY);
         uriBuilder.appendQueryParameter(SHOW_FIELDS, THUMBNAIL_TRAIL_TEXT_BYLINE);
-        String section = sharedPreferences.getString(getString(R.string.settings_category_to_show_key), getString(R.string.settings_category_to_show_default));
+        String section = sharedPreferences.getString(getString(R.string.settings_category_to_show_key),
+                getString(R.string.settings_category_to_show_default));
         if (!section.equals(NONE)) {
             uriBuilder.appendQueryParameter(SECTION, section);
         }

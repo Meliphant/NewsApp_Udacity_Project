@@ -15,7 +15,7 @@
     <string name="settings_category_to_show_key">only_show</string>
     <string name="settings_category_to_show_default">none</string>
 
-    <string name="settings_category_to_show_none_label">All</string>
+    <string name="settings_category_to_show_none_label">None</string>
     <string name="settings_category_to_show_none_value" translatable="false">none</string>
 
     <string name="settings_category_to_show_sport_label">Sport</string>
