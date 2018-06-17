@@ -7,7 +7,6 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-
 import com.example.android.newsapp_udacity_project.R;
 
 public class SettingsActivity extends AppCompatActivity {
@@ -45,6 +44,4 @@ public class SettingsActivity extends AppCompatActivity {
             return true;
         }
     }
-
-
 }
