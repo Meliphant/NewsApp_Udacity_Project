@@ -15,27 +15,27 @@
     <string name="settings_category_to_show_key">only_show</string>
     <string name="settings_category_to_show_default">none</string>
 
-    <string name="settings_order_by_none_label">All</string>
-    <string name="settings_order_by_none_value" translatable="false">none</string>
+    <string name="settings_category_to_show_none_label">All</string>
+    <string name="settings_category_to_show_none_value" translatable="false">none</string>
 
-    <string name="settings_order_by_sport_label">Sport</string>
-    <string name="settings_order_by_sport_value" translatable="false">sport</string>
+    <string name="settings_category_to_show_sport_label">Sport</string>
+    <string name="settings_category_to_show_sport_value" translatable="false">sport</string>
 
-    <string name="settings_order_by_football_label">Football</string>
-    <string name="settings_order_by_football_value" translatable="false">football</string>
+    <string name="settings_category_to_show_football_label">Football</string>
+    <string name="settings_category_to_show_football_value" translatable="false">football</string>
 
-    <string name="settings_order_by_education_label">Education</string>
-    <string name="settings_order_by_education_value" translatable="false">education</string>
+    <string name="settings_category_to_show_education_label">Education</string>
+    <string name="settings_category_to_show_education_value" translatable="false">education</string>
 
-    <string name="settings_order_by_technology_label">Technology</string>
-    <string name="settings_order_by_technology_value" translatable="false">technology</string>
+    <string name="settings_category_to_show_technology_label">Technology</string>
+    <string name="settings_category_to_show_technology_value" translatable="false">technology</string>
 
-    <string name="settings_order_by_society_label">Society</string>
-    <string name="settings_order_by_society_value" translatable="false">society</string>
+    <string name="settings_category_to_show_society_label">Society</string>
+    <string name="settings_category_to_show_society_value" translatable="false">society</string>
 
-    <string name="settings_order_by_business_label">Business</string>
-    <string name="settings_order_by_business_value" translatable="false">business</string>
+    <string name="settings_category_to_show_business_label">Business</string>
+    <string name="settings_category_to_show_business_value" translatable="false">business</string>
 
-    <string name="settings_order_by_environment_label">Environment</string>
-    <string name="settings_order_by_environment_value" translatable="false">environment</string>
+    <string name="settings_category_to_show_environment_label">Environment</string>
+    <string name="settings_category_to_show_environment_value" translatable="false">environment</string>
 </resources>
