@@ -2,4 +2,29 @@
     <string name="app_name">Guardian News</string>
     <string name="no_internet_connection">No internet connection</string>
     <string name="no_news_update">No news update. Please try again later.</string>
+
+    <string name="settings_menu_item">Settings</string>
+    <string name="settings_title">News Settings</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="settings_page_size_news">Page size</string>
+    <string name="settings_page_size_key">page_size</string>
+    <string name="settings_page_size_default">10</string>
+
+    <string name="settings_only_show">Only show</string>
+    <string name="settings_only_show_key">only_show</string>
+    <string name="settings_only_show_default">none</string>
+    <string name="settings_order_by_none_label">None</string>
+    <string name="settings_order_by_none_value">none</string>
+
+    <string name="settings_order_by_sport_label">Sport</string>
+    <string name="settings_order_by_sport_value">sport</string>
+
+    <string name="settings_order_by_education_label">Education</string>
+    <string name="settings_order_by_education_value">education</string>
+
+    <string name="settings_order_by_football_label">Football</string>
+    <string name="settings_order_by_football_value">football</string>
+
+    <string name="settings_order_by_technology_label">Technology</string>
+    <string name="settings_order_by_technology_value">technology</string>
 </resources>

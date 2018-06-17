@@ -10,11 +10,14 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.android.newsapp_udacity_project.data.AsyncLoader;
+import com.example.android.newsapp_udacity_project.data.SettingsActivity;
 import com.example.android.newsapp_udacity_project.model.News;
 import com.example.android.newsapp_udacity_project.R;
 
@@ -111,5 +114,22 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             emptyStateTextView.setText(R.string.no_internet_connection);
             adapter.clear();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            Intent settingsIntent = new Intent(this, SettingsActivity.class);
+            startActivity(settingsIntent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
