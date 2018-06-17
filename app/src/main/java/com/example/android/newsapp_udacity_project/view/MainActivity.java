@@ -12,6 +12,8 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -50,12 +52,19 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private ListView newsListView;
     private ConnectivityManager connectivityManager;
     private NetworkInfo networkInfo;
+    private RecyclerView recyclerView;
+    private RecyclerAdapter recyclerAdapter;
+    private ArrayList<News> news;
+    private LinearLayoutManager linearLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        newsListView = findViewById(R.id.list_view);
+//        newsListView = findViewById(R.id.list_view);
+        news = new ArrayList<>();
+        recyclerView = findViewById(R.id.recycler_view);
+
         emptyStateTextView = findViewById(R.id.empty_view);
 
         mSwipeRefreshLayout = findViewById(R.id.refresh);
@@ -63,8 +72,12 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         mSwipeRefreshLayout.setColorSchemeColors(getResources().getColor(android.R.color.holo_blue_dark));
         mSwipeRefreshLayout.setRefreshing(true);
 
-        adapter = new ArrayAdapter(this, new ArrayList<News>());
-        newsListView.setAdapter(adapter);
+        recyclerAdapter = new RecyclerAdapter(this, news);
+        linearLayoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setAdapter(recyclerAdapter);
+//        adapter = new ArrayAdapter(this, new ArrayList<News>());
+//        newsListView.setAdapter(adapter);
 
         connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         networkInfo = connectivityManager.getActiveNetworkInfo();
@@ -75,12 +88,12 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             emptyStateTextView.setVisibility(View.GONE);
         }
 
-        newsListView.setOnItemClickListener((parent, view, position, id) -> {
-            News currentNews = adapter.getItem(position);
-            Uri newsUri = Uri.parse(currentNews.getUrl());
-            Intent newsIntent = new Intent(Intent.ACTION_VIEW, newsUri);
-            startActivity(newsIntent);
-        });
+//        newsListView.setOnItemClickListener((parent, view, position, id) -> {
+//            News currentNews = adapter.getItem(position);
+//            Uri newsUri = Uri.parse(currentNews.getUrl());
+//            Intent newsIntent = new Intent(Intent.ACTION_VIEW, newsUri);
+//            startActivity(newsIntent);
+//        });
 
         loader = (AsyncLoader) getLoaderManager().initLoader(NEWS_LOADER_ID, null, this);
     }
@@ -93,10 +106,11 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public void onLoadFinished(Loader<List<News>> loader, List<News> data) {
         emptyStateTextView.setText(R.string.no_news_update);
-        adapter.clear();
+        news.clear();
         mSwipeRefreshLayout.setRefreshing(true);
         if (data != null && !data.isEmpty()) {
-            adapter.addAll(data);
+            news.addAll(data);
+            recyclerAdapter.notifyDataSetChanged();
             mSwipeRefreshLayout.setRefreshing(false);
             emptyStateTextView.setVisibility(View.GONE);
         } else {
@@ -109,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public void onLoaderReset(Loader<List<News>> loader) {
-        adapter.clear();
+        news.clear();
     }
 
     @Override
@@ -117,7 +131,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         if (networkInfo != null && networkInfo.isConnected()) {
-            adapter.clear();
+            news.clear();
             loader.setUrl(searchResult(null));
             loader.forceLoad();
             emptyStateTextView.setVisibility(View.GONE);
@@ -125,7 +139,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             mSwipeRefreshLayout.setRefreshing(false);
             emptyStateTextView.setVisibility(View.VISIBLE);
             emptyStateTextView.setText(R.string.no_internet_connection);
-            adapter.clear();
+            news.clear();
         }
     }
 
