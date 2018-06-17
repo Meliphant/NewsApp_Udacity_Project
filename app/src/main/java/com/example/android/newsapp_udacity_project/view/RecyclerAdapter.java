@@ -14,33 +14,16 @@ import android.widget.TextView;
 import com.example.android.newsapp_udacity_project.R;
 import com.example.android.newsapp_udacity_project.model.News;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.NewsHolder> {
 
     private Context context;
-    private ArrayList<News> news;
+    private List<News> news;
 
-    public RecyclerAdapter(Context context, ArrayList<News> news) {
+    public RecyclerAdapter(Context context, List<News> news) {
         this.context = context;
         this.news = news;
-    }
-
-    public class NewsHolder extends RecyclerView.ViewHolder {
-        public TextView titleTextView;
-        public TextView categoryNameTextView;
-        public TextView authorTextView;
-        public TextView dateTextView;
-        public CardView cardView;
-
-        public NewsHolder(View v) {
-            super(v);
-            cardView = v.findViewById(R.id.card_view);
-            titleTextView = v.findViewById(R.id.title);
-            categoryNameTextView = v.findViewById(R.id.category);
-            dateTextView = v.findViewById(R.id.date);
-            authorTextView = v.findViewById(R.id.author);
-        }
     }
 
     @Override
@@ -64,6 +47,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.NewsHo
             context.startActivity(newsIntent);
         });
     }
+
     @Override
     public int getItemCount() {
         return news.size();
@@ -72,5 +56,22 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.NewsHo
     @Override
     public long getItemId(int position) {
         return super.getItemId(position);
+    }
+
+    public class NewsHolder extends RecyclerView.ViewHolder {
+        public TextView titleTextView;
+        public TextView categoryNameTextView;
+        public TextView authorTextView;
+        public TextView dateTextView;
+        public CardView cardView;
+
+        public NewsHolder(View v) {
+            super(v);
+            cardView = v.findViewById(R.id.card_view);
+            titleTextView = v.findViewById(R.id.title);
+            categoryNameTextView = v.findViewById(R.id.category);
+            dateTextView = v.findViewById(R.id.date);
+            authorTextView = v.findViewById(R.id.author);
+        }
     }
 }

@@ -8,6 +8,7 @@ import com.example.android.newsapp_udacity_project.model.News;
 import java.util.List;
 
 public class AsyncLoader extends AsyncTaskLoader<List<News>> {
+    private static final String LOG_TAG = AsyncLoader.class.getSimpleName();
     private String url;
 
     public AsyncLoader(Context context, String url) {

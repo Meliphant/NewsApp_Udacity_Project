@@ -24,7 +24,7 @@
             android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.android.newsapp_udacity_project.view.MainActivity"/>
+                android:value="com.example.android.newsapp_udacity_project.view.MainActivity" />
         </activity>
     </application>
 

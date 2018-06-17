@@ -8,6 +8,7 @@ import com.example.android.newsapp_udacity_project.model.News;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -122,7 +123,7 @@ public class Utils {
             JSONObject response = baseJsonResponse.getJSONObject(RESPONSE);
             JSONArray results = response.getJSONArray(RESULTS);
 
-            for (int i = 0; i < response.length(); i++) {
+            for (int i = 0; i < results.length(); i++) {
 
                 JSONObject currentNewsObj = results.getJSONObject(i);
                 String newsTitle = currentNewsObj.optString(TITLE);

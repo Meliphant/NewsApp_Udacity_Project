@@ -7,6 +7,7 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+
 import com.example.android.newsapp_udacity_project.R;
 
 public class SettingsActivity extends AppCompatActivity {
@@ -18,6 +19,8 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     public static class NewsPreferenceFragment extends PreferenceFragment implements Preference.OnPreferenceChangeListener {
+        private static final String LOG_TAG = SettingsActivity.class.getSimpleName();
+
         @Override
         public void onCreate(@Nullable Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
