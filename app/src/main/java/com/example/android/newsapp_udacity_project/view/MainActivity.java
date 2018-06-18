@@ -26,9 +26,10 @@ import com.example.android.newsapp_udacity_project.model.News;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.prefs.PreferenceChangeListener;
 
 public class MainActivity extends AppCompatActivity implements
-        LoaderManager.LoaderCallbacks<List<News>>, SwipeRefreshLayout.OnRefreshListener {
+        LoaderManager.LoaderCallbacks<List<News>>, SwipeRefreshLayout.OnRefreshListener{
 
     private static final String REQUEST_URL = "http://content.guardianapis.com/search";
     private static final int NEWS_LOADER_ID = 1;
@@ -54,6 +55,8 @@ public class MainActivity extends AppCompatActivity implements
     private RecyclerAdapter mRecyclerAdapter;
     private List<News> mListNews;
     private LinearLayoutManager mLinearLayoutManager;
+    SharedPreferences prefs;
+    private PreferenceChangeListener mPreferenceListener = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +84,11 @@ public class MainActivity extends AppCompatActivity implements
         }
 
         mLoader = (AsyncLoader) getLoaderManager().initLoader(NEWS_LOADER_ID, null, this);
+
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        mPreferenceListener = new PreferenceChangeListener();
+        prefs.registerOnSharedPreferenceChangeListener(mPreferenceListener);
+
     }
 
     private void setUpRecycler(List<News> news) {
@@ -89,6 +97,22 @@ public class MainActivity extends AppCompatActivity implements
             mLinearLayoutManager = new LinearLayoutManager(getApplicationContext());
             mRecyclerView.setLayoutManager(mLinearLayoutManager);
             mRecyclerView.setAdapter(mRecyclerAdapter);
+        }
+    }
+
+    private void executeQuery(){
+        ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr != null ? connMgr.getActiveNetworkInfo() : null;
+        if (networkInfo != null && networkInfo.isConnected()) {
+            mListNews.clear();
+            mLoader.setUrl(searchResult(null));
+            mLoader.forceLoad();
+            mEmptyStateTextView.setVisibility(View.GONE);
+        } else {
+            mSwipeRefreshLayout.setRefreshing(false);
+            mEmptyStateTextView.setVisibility(View.VISIBLE);
+            mEmptyStateTextView.setText(R.string.no_internet_connection);
+            mListNews.clear();
         }
     }
 
@@ -122,19 +146,7 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onRefresh() {
-        ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connMgr != null ? connMgr.getActiveNetworkInfo() : null;
-        if (networkInfo != null && networkInfo.isConnected()) {
-            mListNews.clear();
-            mLoader.setUrl(searchResult(null));
-            mLoader.forceLoad();
-            mEmptyStateTextView.setVisibility(View.GONE);
-        } else {
-            mSwipeRefreshLayout.setRefreshing(false);
-            mEmptyStateTextView.setVisibility(View.VISIBLE);
-            mEmptyStateTextView.setText(R.string.no_internet_connection);
-            mListNews.clear();
-        }
+        executeQuery();
     }
 
     private String searchResult(String query) {
@@ -182,5 +194,12 @@ public class MainActivity extends AppCompatActivity implements
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private class PreferenceChangeListener implements SharedPreferences.OnSharedPreferenceChangeListener {
+        @Override
+        public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
+            executeQuery();
+        }
     }
 }
