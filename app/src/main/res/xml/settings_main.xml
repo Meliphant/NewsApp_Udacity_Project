@@ -9,6 +9,7 @@
         android:selectAllOnFocus="true"
         android:title="@string/settings_page_size" />
 
+    <!--List allows user to choose the topic-->
     <ListPreference
         android:defaultValue="@string/settings_category_to_show_default"
         android:entries="@array/settings_category_to_show_labels"

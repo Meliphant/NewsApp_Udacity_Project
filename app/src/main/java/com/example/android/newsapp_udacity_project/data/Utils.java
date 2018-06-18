@@ -33,6 +33,9 @@ public class Utils {
     private static final String AUTHOR = "byline";
     private static final String TITLE_IS_MISSING = "Title is missing";
     private static final String CATEGORY_IS_MISSING = "Section is missing";
+    private static final Integer SET_READ_TIMEOUT = 10000;
+    private static final Integer SET_CONNECT_TIMEOUT = 15000;
+    private static final String SET_REQUEST_METHOD = "GET";
 
     private Utils() {
     }
@@ -49,12 +52,12 @@ public class Utils {
 
         try {
             urlConnection = (HttpURLConnection) url.openConnection();
-            urlConnection.setReadTimeout(10000);
-            urlConnection.setConnectTimeout(15000);
-            urlConnection.setRequestMethod("GET");
+            urlConnection.setReadTimeout(SET_READ_TIMEOUT);
+            urlConnection.setConnectTimeout(SET_CONNECT_TIMEOUT);
+            urlConnection.setRequestMethod(SET_REQUEST_METHOD);
             urlConnection.connect();
 
-            if (urlConnection.getResponseCode() == 200) {
+            if (urlConnection.getResponseCode() == HttpURLConnection.HTTP_OK) {
                 inputStream = urlConnection.getInputStream();
                 jsonResponse = readFromStream(inputStream);
             } else {

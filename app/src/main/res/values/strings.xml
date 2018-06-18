@@ -38,4 +38,5 @@
 
     <string name="settings_category_to_show_environment_label">Environment</string>
     <string name="settings_category_to_show_environment_value" translatable="false">environment</string>
+
 </resources>

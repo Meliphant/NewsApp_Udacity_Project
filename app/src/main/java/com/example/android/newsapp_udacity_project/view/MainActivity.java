@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void onRefresh() {
         ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        NetworkInfo networkInfo = connMgr != null ? connMgr.getActiveNetworkInfo() : null;
         if (networkInfo != null && networkInfo.isConnected()) {
             mListNews.clear();
             mLoader.setUrl(searchResult(null));
